@@ -7,7 +7,7 @@ import AuthLayout from '../components/AuthLayout';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import { showToast } from '../utils/toaster';
-
+import dashboardIcon from '../assets/dashboard.svg';
 /**
  * LoginPage Component
  * Handles user authentication with email and password
@@ -95,9 +95,6 @@ const LoginPage = () => {
     dispatch(setLoading(true));
     
     try {
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
       dispatch(login({ email: form.email, name: form.email.split('@')[0] }));
       
       // Add default notifications after successful login
@@ -115,7 +112,7 @@ const LoginPage = () => {
 
   return (
     <AuthLayout 
-      icon="🔒" 
+      icon={<img src={dashboardIcon} alt="Dashboard" className="w-10 h-10" />}
       subtitle="Sign in to your account"
     >
       {/* Login Form */}

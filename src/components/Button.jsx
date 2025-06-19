@@ -2,7 +2,6 @@ import React from 'react';
 
 /**
  * Button Component
- * Reusable button with different variants, sizes, and states
  * 
  * @param {string} variant - 'primary', 'secondary', 'danger'
  * @param {string} size - 'sm', 'md', 'lg'
@@ -49,7 +48,7 @@ const Button = ({
     >
       {loading ? (
         <div className="flex items-center justify-center">
-          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-current mr-2"></div>
+          <div className="animate-spin rounded-full lg:h-5 lg:w-5 h-4 w-4 border-b-2 border-current mr-2"></div>
           Loading...
         </div>
       ) : (

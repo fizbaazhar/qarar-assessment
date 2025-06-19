@@ -6,6 +6,7 @@ import AuthLayout from '../components/AuthLayout';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import { showToast } from '../utils/toaster';
+import dashboardIcon from '../assets/dashboard.svg';
 
 const SignupPage = () => {
   const [form, setForm] = useState({ 
@@ -98,7 +99,7 @@ const SignupPage = () => {
 
   return (
     <AuthLayout 
-      icon="🚀" 
+      icon={<img src={dashboardIcon} alt="Dashboard" className="w-10 h-10" />}
       subtitle="Create your account"
     >
       {/* Signup Form */}
