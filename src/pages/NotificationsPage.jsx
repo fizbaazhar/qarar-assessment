@@ -82,9 +82,9 @@ const NotificationsPage = () => {
       <div className="max-w-full mx-auto">
         <div className="bg-white rounded-lg shadow-sm">
           <div className="px-3 sm:px-4 py-4 sm:py-5">
-            <h2 className="text-base sm:text-lg font-medium text-gray-900 mb-3 sm:mb-4">Notifications</h2>
+            <h2 className="page-heading p-2 lg:p-4 ">Notifications</h2>
             
-            <div className="space-y-1 divide-y divide-gray-100">
+            <div className="space-y-1 divide-y divide-gray-100 mt-2 md:mt-3 lg:mt-4 xl:mt-6">
               {notifications && notifications.length > 0 ? (
                 notifications.map((notification) => (
                   <NotificationCard

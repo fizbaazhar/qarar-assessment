@@ -8,6 +8,7 @@
   --color-primary-20: rgba(100, 164, 244, 0.2);
   --color-primary-50: rgba(100, 164, 244, 0.5);
   --color-primary-80: rgba(100, 164, 244, 0.8);
+  --color-heading: #111827;
 }
 
 /* Custom Utility Classes */
@@ -147,4 +148,26 @@
   background-color: white;
   color: var(--color-primary);
   border-color: var(--color-primary);
+}
+
+/* Page Heading Styles */
+.page-heading {
+  font-size: 28px;
+  line-height: 10px;
+  font-weight: 600;
+  color: var(--color-heading);
+}
+
+@media (max-width: 1024px) {
+  .page-heading {
+    font-size: 23px; 
+  }
 } 
+
+@media (max-width: 640px) {
+  .page-heading {
+    font-size: 20px; 
+    line-height: 30px;
+  }
+}
+

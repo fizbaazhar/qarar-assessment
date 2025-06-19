@@ -29,7 +29,7 @@ const ProfilePage = () => {
 
   return (
     <MainLayout>
-      <div className="flex justify-center items-center min-h-[calc(100vh-8rem)]">
+      <div className="flex flex-col justify-center items-center min-h-[calc(100vh-8rem)]">
         <ProfileCard
           profile={profile}
           onSave={handleSave}

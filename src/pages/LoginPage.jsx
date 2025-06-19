@@ -86,7 +86,7 @@ const LoginPage = () => {
     >
       {/* Login Form */}
       <form onSubmit={handleSubmit} className="w-full space-y-6">
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+        <h2 className="page-heading text-center">
           Welcome Back
         </h2>
         
