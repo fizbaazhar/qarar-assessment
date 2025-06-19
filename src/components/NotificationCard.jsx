@@ -13,7 +13,7 @@ const NotificationCard = ({
     switch (type) {
       case 'comment':
         return (
-          <div className="w-10 h-10 bg-[#64A4F4] rounded-lg flex items-center justify-center mr-3">
+          <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center mr-3">
             <img src={messageIcon} alt="New Comment" className="w-5 h-5" />
           </div>
         );

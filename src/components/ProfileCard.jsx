@@ -53,7 +53,7 @@ const ProfileCard = ({ profile = {}, onSave, onAvatarChange }) => {
     <Card className="p-4 sm:p-6 max-w-md w-full">
       <div className="flex flex-col items-center mb-4 sm:mb-6">
         <div
-          className="w-20 h-20 sm:w-24 sm:h-24 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden cursor-pointer border-2 border-gray-300 hover:border-blue-400 transition"
+          className="w-20 h-20 sm:w-24 sm:h-24 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden cursor-pointer border-2 border-gray-300 hover:border-primary transition"
           onClick={handleAvatarClick}
           title="Upload profile picture"
         >

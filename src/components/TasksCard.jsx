@@ -8,7 +8,7 @@ const TaskItem = ({ task, onToggle, onMenuClick }) => (
         type="checkbox"
         checked={task.completed}
         onChange={() => onToggle(task.id)}
-        className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+        className="w-4 h-4 text-primary rounded border-gray-300 focus:ring-primary"
       />
       <span className={`text-sm ${task.completed ? 'text-gray-500 line-through' : 'text-gray-900'}`}>
         {task.title}

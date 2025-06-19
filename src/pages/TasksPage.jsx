@@ -66,7 +66,7 @@ const SortableTaskItem = ({ task, onToggle, onDelete }) => {
             type="checkbox"
             checked={task.completed}
             onChange={() => onToggle(task.id)}
-            className="h-3 w-3 sm:h-4 sm:w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mr-2 sm:mr-3"
+            className="h-3 w-3 sm:h-4 sm:w-4 text-primary focus:ring-primary border-gray-300 rounded mr-2 sm:mr-3"
           />
 
           {/* Task Title */}
@@ -194,13 +194,13 @@ const TasksPage = () => {
                     if (error) setError('');
                   }}
                   placeholder="Enter a new task..."
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                 />
                 {error && <p className="text-red-500 text-xs sm:text-sm mt-1">{error}</p>}
               </div>
               <button
                 type="submit"
-                className="px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base bg-primary text-white font-medium rounded-lg hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
               >
                 Add Task
               </button>
