@@ -2,7 +2,6 @@ import React from 'react';
 
 /**
  * Card Component
- * Reusable card container with consistent styling and optional header
  * 
  * @param {string} title - Card title (optional)
  * @param {React.ReactNode} children - Card content

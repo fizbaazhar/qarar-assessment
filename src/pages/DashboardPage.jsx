@@ -5,7 +5,6 @@ import MainLayout from '../components/MainLayout';
 /**
  * DashboardPage Component
  * Main dashboard layout with navigation and component sections
- * Will contain: Dashboard Card, Notifications Panel, Task List
  */
 const DashboardPage = () => {
   const salesData = {

@@ -38,7 +38,6 @@ const authSlice = createSlice({
     signup: (state, action) => {
       const { email, name } = action.payload;
       
-      // Create comprehensive user object with profile data
       const userData = {
         id: Date.now(),
         email,
