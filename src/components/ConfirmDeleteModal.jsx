@@ -9,7 +9,6 @@ import {
 } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
 import Button from './Button';
-import { showToast } from '../utils/toaster';
 
 const ConfirmDeleteModal = ({ open, onClose, onConfirm, taskTitle }) => {
   return (

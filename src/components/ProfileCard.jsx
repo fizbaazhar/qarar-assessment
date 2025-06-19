@@ -53,9 +53,7 @@ const ProfileCard = ({ profile = {}, onSave, onAvatarChange }) => {
       newErrors.age = 'Age is required';
     } else if (isNaN(formData.age) || formData.age < 0) {
       newErrors.age = 'Please enter a valid age';
-    } else if (formData.age > 120) {
-      newErrors.age = 'Please enter a valid age below 120';
-    }
+    } 
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;

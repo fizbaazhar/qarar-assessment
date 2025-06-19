@@ -179,7 +179,7 @@ const SignupPage = () => {
         </Button>
       </form>
 
-      {/* Login Link */}
+      {/* login link */}
       <div className="mt-6 text-center">
         <p className="text-gray-600 text-sm">
           Already have an account?{' '}
