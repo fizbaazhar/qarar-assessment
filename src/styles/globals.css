@@ -1,0 +1,145 @@
+/* Global CSS Variables */
+:root {
+  --color-primary: #64A4F4;
+  --color-primary-light: #85b5f6;
+  --color-primary-dark: #4a8be8;
+  --color-primary-10: rgba(100, 164, 244, 0.1);
+  --color-primary-20: rgba(100, 164, 244, 0.2);
+  --color-primary-50: rgba(100, 164, 244, 0.5);
+  --color-primary-80: rgba(100, 164, 244, 0.8);
+}
+
+/* Custom Utility Classes */
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-primary-light {
+  background-color: var(--color-primary-light);
+}
+
+.bg-primary-dark {
+  background-color: var(--color-primary-dark);
+}
+
+.bg-primary-10 {
+  background-color: var(--color-primary-10);
+}
+
+.bg-primary-20 {
+  background-color: var(--color-primary-20);
+}
+
+.bg-primary-50 {
+  background-color: var(--color-primary-50);
+}
+
+.bg-primary-80 {
+  background-color: var(--color-primary-80);
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-primary-light {
+  color: var(--color-primary-light);
+}
+
+.text-primary-dark {
+  color: var(--color-primary-dark);
+}
+
+.border-primary {
+  border-color: var(--color-primary);
+}
+
+.border-primary-light {
+  border-color: var(--color-primary-light);
+}
+
+.border-primary-dark {
+  border-color: var(--color-primary-dark);
+}
+
+/* Hover States */
+.hover\:bg-primary:hover {
+  background-color: var(--color-primary);
+}
+
+.hover\:bg-primary-light:hover {
+  background-color: var(--color-primary-light);
+}
+
+.hover\:bg-primary-dark:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.hover\:bg-primary-80:hover {
+  background-color: var(--color-primary-80);
+}
+
+.hover\:bg-white:hover {
+  background-color: white;
+}
+
+.hover\:text-primary:hover {
+  color: var(--color-primary);
+}
+
+.hover\:text-primary-dark:hover {
+  color: var(--color-primary-dark);
+}
+
+.hover\:border-primary:hover {
+  border-color: var(--color-primary);
+}
+
+/* Focus States */
+.focus\:ring-primary:focus {
+  --tw-ring-color: var(--color-primary);
+}
+
+.focus\:border-primary:focus {
+  border-color: var(--color-primary);
+}
+
+/* Button Styles */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+.btn-primary:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(100, 164, 244, 0.3);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Custom Button Hover Effect */
+.btn-primary-hover {
+  background-color: var(--color-primary);
+  color: white;
+  border: 2px solid transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary-hover:hover {
+  background-color: white;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+} 
