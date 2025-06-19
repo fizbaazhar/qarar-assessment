@@ -29,25 +29,6 @@ ChartJS.register(
  * 
  * @component
  * @example
- * // Basic usage with title and value
- * <DashboardCard 
- *   title="Sales" 
- *   value={3200} 
- *   prefix="$"
- *   trend={12.5}
- * />
- * 
- * // With chart data
- * <DashboardCard
- *   title="Revenue"
- *   value={5000}
- *   prefix="$"
- *   trend={-2.5}
- *   chartData={{
- *     labels: ['Jan', 'Feb', 'Mar'],
- *     values: [4000, 4500, 5000]
- *   }}
- * />
  */
 const DashboardCard = ({
   title,
@@ -116,22 +97,22 @@ const DashboardCard = ({
 };
 
 DashboardCard.propTypes = {
-  /** The title of the card */
+  /**  title of the card */
   title: PropTypes.string.isRequired,
-  /** The main value to display */
+  /**  main value to display */
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   /** Symbol to show before the value (e.g., '$') */
   prefix: PropTypes.string,
   /** Symbol to show after the value (e.g., '%') */
   suffix: PropTypes.string,
-  /** Percentage trend (positive or negative) */
+  /** % trend (positive or negative) */
   trend: PropTypes.number,
-  /** Data for the line chart */
+  /** data for the line chart */
   chartData: PropTypes.shape({
     labels: PropTypes.arrayOf(PropTypes.string),
     values: PropTypes.arrayOf(PropTypes.number),
   }),
-  /** Additional CSS classes */
+  /** additional CSS classes */
   className: PropTypes.string,
 };
 

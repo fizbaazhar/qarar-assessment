@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from '../../test/test-utils'
 import Button from '../Button'
 
 describe('Button Component', () => {
-  // Test basic rendering
+  //  basic test rendering
   it('renders button with children text', () => {
     render(<Button>Click me</Button>)
     expect(screen.getByRole('button', { name: 'Click me' })).toBeInTheDocument()
