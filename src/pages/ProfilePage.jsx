@@ -3,8 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import ProfileCard from '../components/ProfileCard';
 import { updateProfile, setAvatar } from '../redux/profileSlice';
 import { addNotification } from '../redux/notificationsSlice';
-import { logout } from '../redux/authSlice';
-import Header from '../components/Header';
+import MainLayout from '../components/MainLayout';
 
 const ProfilePage = () => {
   const profile = useSelector((state) => state.profile);
@@ -28,21 +27,16 @@ const ProfilePage = () => {
     }));
   };
 
-  const handleLogout = () => {
-    dispatch(logout());
-  };
-
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header onLogout={handleLogout} />
-      <div className="flex justify-center items-center min-h-[calc(100vh-4rem)]">
+    <MainLayout>
+      <div className="flex justify-center items-center min-h-[calc(100vh-8rem)]">
         <ProfileCard
           profile={profile}
           onSave={handleSave}
           onAvatarChange={handleAvatarChange}
         />
       </div>
-    </div>
+    </MainLayout>
   );
 };
 

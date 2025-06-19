@@ -21,7 +21,7 @@ import { CSS } from '@dnd-kit/utilities';
 import { logout } from '../redux/authSlice';
 import { addTask, removeTask, toggleTask, reorderTasks } from '../redux/tasksSlice';
 import { addNotification } from '../redux/notificationsSlice';
-import Header from '../components/Header';
+import MainLayout from '../components/MainLayout';
 
 // Sortable Task Item Component
 const SortableTaskItem = ({ task, onToggle, onDelete }) => {
@@ -177,9 +177,8 @@ const TasksPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header onLogout={handleLogout} />
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <MainLayout>
+      <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-lg shadow-lg p-6">
           <h1 className="text-3xl font-bold text-gray-900 mb-8">Task Management</h1>
           
@@ -201,7 +200,7 @@ const TasksPage = () => {
               </div>
               <button
                 type="submit"
-                className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200"
+                className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               >
                 Add Task
               </button>
@@ -209,57 +208,32 @@ const TasksPage = () => {
           </form>
 
           {/* Task List */}
-          <div className="space-y-2">
-            {tasks.length === 0 ? (
-              <div className="text-center py-8 text-gray-500">
-                <svg className="w-12 h-12 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                </svg>
-                <p className="text-lg">No tasks yet</p>
-                <p className="text-sm">Add your first task above to get started!</p>
-              </div>
-            ) : (
-              <DndContext
-                sensors={sensors}
-                collisionDetection={closestCenter}
-                onDragEnd={handleDragEnd}
-              >
-                <SortableContext
-                  items={tasks.map(task => task.id)}
-                  strategy={verticalListSortingStrategy}
-                >
-                  {tasks.map((task) => (
-                    <SortableTaskItem
-                      key={task.id}
-                      task={task}
-                      onToggle={handleToggleTask}
-                      onDelete={handleDeleteTask}
-                    />
-                  ))}
-                </SortableContext>
-              </DndContext>
-            )}
-          </div>
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
+          >
+            <SortableContext
+              items={tasks.map(task => task.id)}
+              strategy={verticalListSortingStrategy}
+            >
+              {tasks.map((task) => (
+                <SortableTaskItem
+                  key={task.id}
+                  task={task}
+                  onToggle={handleToggleTask}
+                  onDelete={handleDeleteTask}
+                />
+              ))}
+            </SortableContext>
+          </DndContext>
 
-          {/* Task Stats */}
-          {tasks.length > 0 && (
-            <div className="mt-8 pt-6 border-t border-gray-200">
-              <div className="flex justify-between text-sm text-gray-600">
-                <span>
-                  Total tasks: {tasks.length}
-                </span>
-                <span>
-                  Completed: {tasks.filter(task => task.completed).length}
-                </span>
-                <span>
-                  Pending: {tasks.filter(task => !task.completed).length}
-                </span>
-              </div>
-            </div>
+          {tasks.length === 0 && (
+            <p className="text-gray-500 text-center py-8">No tasks yet. Add one above!</p>
           )}
         </div>
       </div>
-    </div>
+    </MainLayout>
   );
 };
 

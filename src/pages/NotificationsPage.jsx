@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Header from '../components/Header';
+import MainLayout from '../components/MainLayout';
 import NotificationCard from '../components/NotificationCard';
 import {
   selectFilteredNotifications,
@@ -10,7 +10,7 @@ import {
   deleteNotification
 } from '../redux/notificationsSlice';
 
-const NotificationsPage = ({ onLogout }) => {
+const NotificationsPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const notifications = useSelector(selectFilteredNotifications);
@@ -78,10 +78,8 @@ const NotificationsPage = ({ onLogout }) => {
   console.log('Current notifications:', notifications); // Debug log
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header onLogout={onLogout} />
-      
-      <div className="max-w-full mx-auto px-4 sm:px-6 py-8">
+    <MainLayout>
+      <div className="max-w-full mx-auto">
         <div className="bg-white rounded-lg shadow-sm">
           <div className="px-4 py-5">
             <h2 className="text-lg font-medium text-gray-900 mb-4">Notifications</h2>
@@ -106,7 +104,7 @@ const NotificationsPage = ({ onLogout }) => {
           </div>
         </div>
       </div>
-    </div>
+    </MainLayout>
   );
 };
 
