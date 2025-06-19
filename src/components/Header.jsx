@@ -24,7 +24,8 @@ import {
   Dashboard as DashboardIcon,
   Task as TaskIcon,
   Person as PersonIcon,
-  Logout as LogoutIcon
+  Logout as LogoutIcon,
+  KeyboardArrowDown as ChevronIcon
 } from '@mui/icons-material';
 
 const Header = ({ onLogout }) => {
@@ -133,28 +134,42 @@ const Header = ({ onLogout }) => {
             <IconButton
               onClick={() => setDropdownOpen(!dropdownOpen)}
               sx={{ 
-                p: { xs: 0.5, sm: 1 }
+                p: { xs: 0.5, sm: 1 },
+                '&:hover': {
+                  backgroundColor: 'transparent'
+                }
               }}
             >
-              {avatarSrc ? (
-                <Avatar 
-                  src={avatarSrc} 
-                  sx={{ 
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                {avatarSrc ? (
+                  <Avatar 
+                    src={avatarSrc} 
+                    sx={{ 
+                      width: { xs: 30, sm: 38 }, 
+                      height: { xs: 30, sm: 38 },
+                      border: '2px solid var(--color-primary)'
+                    }} 
+                  />
+                ) : (
+                  <Avatar sx={{ 
                     width: { xs: 30, sm: 38 }, 
                     height: { xs: 30, sm: 38 },
-                    border: '2px solid var(--color-primary)'
+                    border: '2px solid var(--color-primary)',
+                    bgcolor: '#E5E7EB'
+                  }}>
+                    <PersonIcon sx={{ color: '#9CA3AF', fontSize: { xs: '1.125rem', sm: '1.625rem' } }} />
+                  </Avatar>
+                )}
+                <ChevronIcon 
+                  sx={{ 
+                    ml: 0.5,
+                    color: 'var(--color-primary)',
+                    transform: dropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                    transition: 'transform 0.2s ease-in-out',
+                    fontSize: { xs: '1.25rem', sm: '1.5rem' }
                   }} 
                 />
-              ) : (
-                <Avatar sx={{ 
-                  width: { xs: 30, sm: 38 }, 
-                  height: { xs: 30, sm: 38 },
-                  border: '2px solid var(--color-primary)',
-                  bgcolor: '#E5E7EB'
-                }}>
-                  <PersonIcon sx={{ color: '#9CA3AF', fontSize: { xs: '1.125rem', sm: '1.625rem' } }} />
-                </Avatar>
-              )}
+              </Box>
             </IconButton>
             <Menu
               anchorEl={dropdownRef.current}

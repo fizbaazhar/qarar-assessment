@@ -7,6 +7,8 @@ import ProfilePage from './pages/ProfilePage';
 import TasksPage from './pages/TasksPage';
 import NotificationsPage from './pages/NotificationsPage';
 import './index.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 /**
  * ProtectedRoute Component
@@ -88,6 +90,7 @@ function App() {
           <Route path="/auth" element={<Navigate to="/login" replace />} />
         </Routes>
       </div>
+      <ToastContainer />
     </Router>
   );
 }

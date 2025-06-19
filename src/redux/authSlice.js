@@ -15,9 +15,13 @@ const saveUser = (user) => {
   localStorage.setItem('user', JSON.stringify(user));
 };
 
-// Helper: Remove user from localStorage
-const removeUser = () => {
+
+// Helper: Clear all localStorage data
+const clearAllLocalStorage = () => {
   localStorage.removeItem('user');
+  localStorage.removeItem('profile');
+  localStorage.removeItem('tasks');
+  localStorage.removeItem('notifications');
 };
 
 const initialState = {
@@ -51,7 +55,7 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.isLoading = false;
       state.error = null;
-      removeUser();
+      clearAllLocalStorage();
     },
     setLoading: (state, action) => {
       state.isLoading = action.payload;
@@ -67,4 +71,18 @@ const authSlice = createSlice({
 });
 
 export const { signup, login, logout, setLoading, setError, clearError } = authSlice.actions;
+
+export const logoutUser = () => (dispatch) => {
+  // Clear all localStorage
+  clearAllLocalStorage();
+  
+  // Reset all Redux slices
+  dispatch(logout());
+  
+  // Reset other slices to their initial state
+  dispatch({ type: 'profile/resetProfile' });
+  dispatch({ type: 'tasks/setTasks', payload: [] });
+  dispatch({ type: 'notifications/clearAllNotifications' });
+};
+
 export default authSlice.reducer;

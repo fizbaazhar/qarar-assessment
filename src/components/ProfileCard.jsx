@@ -10,6 +10,7 @@ const ProfileCard = ({ profile = {}, onSave, onAvatarChange }) => {
     email: '',
     age: '',
   });
+  const [errors, setErrors] = useState({});
   const [avatar, setAvatar] = useState('');
   const fileInputRef = useRef();
 
@@ -23,9 +24,50 @@ const ProfileCard = ({ profile = {}, onSave, onAvatarChange }) => {
     setAvatar(profile.avatar || '');
   }, [profile]);
 
+  const validateForm = () => {
+    const newErrors = {};
+
+    // First Name validation
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = 'First name is required';
+    } else if (formData.firstName.length < 2) {
+      newErrors.firstName = 'First name must be at least 2 characters';
+    }
+
+    // Last Name validation
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = 'Last name is required';
+    } else if (formData.lastName.length < 2) {
+      newErrors.lastName = 'Last name must be at least 2 characters';
+    }
+
+    // Email validation
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    // Age validation
+    if (!formData.age) {
+      newErrors.age = 'Age is required';
+    } else if (isNaN(formData.age) || formData.age < 0) {
+      newErrors.age = 'Please enter a valid age';
+    } else if (formData.age > 120) {
+      newErrors.age = 'Please enter a valid age below 120';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: '' }));
+    }
   };
 
   const handleAvatarChange = (e) => {
@@ -46,7 +88,9 @@ const ProfileCard = ({ profile = {}, onSave, onAvatarChange }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave?.({ ...formData, avatar });
+    if (validateForm()) {
+      onSave?.({ ...formData, avatar });
+    }
   };
 
   return (
@@ -79,31 +123,40 @@ const ProfileCard = ({ profile = {}, onSave, onAvatarChange }) => {
         <Input
           type="text"
           name="firstName"
+          label="First Name"
           placeholder="First Name"
           value={formData.firstName}
           onChange={handleChange}
+          error={errors.firstName}
         />
         <Input
           type="text"
           name="lastName"
+          label="Last Name"
           placeholder="Last Name"
           value={formData.lastName}
           onChange={handleChange}
+          error={errors.lastName}
         />
         <Input
           type="email"
           name="email"
+          label="Email"
           placeholder="Email"
           value={formData.email}
           onChange={handleChange}
+          error={errors.email}
         />
         <Input
           type="number"
           name="age"
+          label="Age"
           placeholder="Age"
           value={formData.age}
           onChange={handleChange}
+          error={errors.age}
           min={0}
+          max={120}
         />
         <Button type="submit" className="w-full">
           Save

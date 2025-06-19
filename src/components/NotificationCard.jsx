@@ -11,34 +11,43 @@ const NotificationCard = ({
   formatTimeAgo
 }) => {
   const getNotificationIcon = (type) => {
+    let icon;
+    let bgColor;
+
     switch (type) {
-      case 'comment':
-        return (
-          <div className="lg:w-10 lg:h-10 md:w-8 md:h-8 w-6 h-6 bg-primary rounded-lg flex items-center justify-center mr-3">
-            <img src={messageIcon} alt="New Comment" className="lg:w-5 lg:h-5 md:w-4 md:h-4 w-3 h-3" />
-          </div>
-        );
-      case 'system':
-        return (
-          <div className="lg:w-10 lg:h-10 md:w-8 md:h-8 w-6 h-6 bg-[#F6A723] rounded-lg flex items-center justify-center mr-3">
-            <img src={systemUpdateIcon} alt="System Update" className="lg:w-5 lg:h-5 md:w-4 md:h-4 w-3 h-3" />
-          </div>
-        );
-      case 'password':
-      case 'update':
-        return (
-          <div className="lg:w-10 lg:h-10 md:w-8 md:h-8 w-6 h-6 bg-[#4AC29C] rounded-lg flex items-center justify-center mr-3">
-                <img src={tickIcon} alt="Complete" className="lg:w-5 lg:h-5 md:w-4 md:h-4 w-3 h-3" />
-          </div>
-        );
+      case 'info':
+        icon = messageIcon;
+        bgColor = NOTIFICATION_TYPES.INFO.bgColor;
+        break;
+      case 'warning':
+        icon = systemUpdateIcon;
+        bgColor = NOTIFICATION_TYPES.WARNING.bgColor;
+        break;
+      case 'success':
+        icon = tickIcon;
+        bgColor = NOTIFICATION_TYPES.SUCCESS.bgColor;
+        break;
+      case 'error':
+        icon = systemUpdateIcon; // You might want to add a specific error icon
+        bgColor = NOTIFICATION_TYPES.ERROR.bgColor;
+        break;
       default:
-        // Fallback to checkmark icon for any unhandled types
-        return (
-          <div className="lg:w-10 lg:h-10 md:w-8 md:h-8 w-6 h-6 bg-[#4AC29C] rounded-lg flex items-center justify-center mr-3">
-             <img src={tickIcon} alt="Complete" className="lg:w-5 lg:h-5 md:w-4 md:h-4 w-3 h-3" />
-          </div>
-        );
+        icon = tickIcon;
+        bgColor = NOTIFICATION_TYPES.SUCCESS.bgColor;
     }
+
+    return (
+      <div 
+        className="lg:w-10 lg:h-10 md:w-8 md:h-8 w-6 h-6 rounded-lg flex items-center justify-center mr-3"
+        style={{ backgroundColor: bgColor }}
+      >
+        <img 
+          src={icon} 
+          alt={`${type} notification`} 
+          className="lg:w-5 lg:h-5 md:w-4 md:h-4 w-3 h-3" 
+        />
+      </div>
+    );
   };
 
   return (

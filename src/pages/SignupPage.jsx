@@ -5,12 +5,8 @@ import { signup, setError, setLoading } from '../redux/authSlice';
 import AuthLayout from '../components/AuthLayout';
 import Input from '../components/Input';
 import Button from '../components/Button';
+import { showToast } from '../utils/toaster';
 
-/**
- * SignupPage Component
- * Handles user registration with name, email, and password
- * Features: Form validation, password confirmation, and navigation to login
- */
 const SignupPage = () => {
   const [form, setForm] = useState({ 
     name: '', 
@@ -90,6 +86,10 @@ const SignupPage = () => {
         email: form.email, 
         name: form.name.trim() 
       }));
+      showToast({
+        type: 'SUCCESS',
+        message: 'Registration successful'
+      });
       navigate('/dashboard');
     } catch (err) {
       dispatch(setError('Registration failed. Please try again.'));

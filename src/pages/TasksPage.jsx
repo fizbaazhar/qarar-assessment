@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { 
-  DndContext, 
+import {
+  DndContext,
   closestCenter,
   KeyboardSensor,
   PointerSensor,
@@ -18,12 +18,13 @@ import {
   useSortable,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { logout } from '../redux/authSlice';
 import { addTask, removeTask, toggleTask, reorderTasks } from '../redux/tasksSlice';
 import { addNotification } from '../redux/notificationsSlice';
 import MainLayout from '../components/MainLayout';
 import AddTaskModal from '../components/AddTaskModal';
 import Button from '../components/Button';
+import ConfirmDeleteModal from '../components/ConfirmDeleteModal';
+import { showToast } from '../utils/toaster';
 
 // Sortable Task Item Component
 const SortableTaskItem = ({ task, onToggle, onDelete }) => {
@@ -46,22 +47,12 @@ const SortableTaskItem = ({ task, onToggle, onDelete }) => {
     <div
       ref={setNodeRef}
       style={style}
-      className={`bg-white border border-gray-200 rounded-lg p-3 sm:p-4 mb-3 shadow-sm hover:shadow-md transition-all duration-200 ${
-        task.completed ? 'opacity-75' : ''
-      }`}
+      className={`bg-white border-t border-gray-200 p-3 sm:p-4 transition-all duration-200 ${task.completed ? 'opacity-75' : ''
+        }`}
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center flex-1 min-w-0">
-          {/* Drag Handle */}
-          <div
-            {...attributes}
-            {...listeners}
-            className="mr-2 sm:mr-3 cursor-grab active:cursor-grabbing text-gray-400 hover:text-gray-600"
-          >
-            <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M7 2a2 2 0 1 1 .001 4.001A2 2 0 0 1 7 2zm0 6a2 2 0 1 1 .001 4.001A2 2 0 0 1 7 8zm0 6a2 2 0 1 1 .001 4.001A2 2 0 0 1 7 14zm6-8a2 2 0 1 1-.001-4.001A2 2 0 0 1 13 6zm0 2a2 2 0 1 1 .001 4.001A2 2 0 0 1 13 8zm0 6a2 2 0 1 1 .001 4.001A2 2 0 0 1 13 14z" />
-            </svg>
-          </div>
+
 
           {/* Checkbox */}
           <input
@@ -73,14 +64,23 @@ const SortableTaskItem = ({ task, onToggle, onDelete }) => {
 
           {/* Task Title */}
           <span
-            className={`flex-1 text-sm sm:text-base text-gray-900 ${
-              task.completed ? 'line-through text-gray-500' : ''
-            }`}
+            className={`flex-1 text-sm sm:text-base text-gray-900 ${task.completed ? 'line-through text-gray-500' : ''
+              }`}
           >
             {task.title}
           </span>
         </div>
 
+        {/* Drag Handle */}
+        <div
+          {...attributes}
+          {...listeners}
+          className="mr-2 sm:mr-3 cursor-grab active:cursor-grabbing text-gray-400 hover:text-gray-600"
+        >
+          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M7 2a2 2 0 1 1 .001 4.001A2 2 0 0 1 7 2zm0 6a2 2 0 1 1 .001 4.001A2 2 0 0 1 7 8zm0 6a2 2 0 1 1 .001 4.001A2 2 0 0 1 7 14zm6-8a2 2 0 1 1-.001-4.001A2 2 0 0 1 13 6zm0 2a2 2 0 1 1 .001 4.001A2 2 0 0 1 13 8zm0 6a2 2 0 1 1 .001 4.001A2 2 0 0 1 13 14z" />
+          </svg>
+        </div>
         {/* Delete Button */}
         <button
           onClick={() => onDelete(task.id)}
@@ -104,6 +104,11 @@ const TasksPage = () => {
   const dispatch = useDispatch();
   const tasks = useSelector((state) => state.tasks);
   const [modalOpen, setModalOpen] = useState(false);
+  const [deleteConfirmation, setDeleteConfirmation] = useState({
+    isOpen: false,
+    taskId: null,
+    taskTitle: ''
+  });
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -111,10 +116,6 @@ const TasksPage = () => {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
-
-  const handleLogout = () => {
-    dispatch(logout());
-  };
 
   const handleAddTask = (newTask) => {
     dispatch(addTask(newTask));
@@ -137,12 +138,26 @@ const TasksPage = () => {
 
   const handleDeleteTask = (taskId) => {
     const task = tasks.find(t => t.id === taskId);
-    dispatch(removeTask(taskId));
-    // Create warning notification for task deletion
-    dispatch(addNotification({
-      type: 'WARNING',
-      customTitle: `Task Deleted: ${task.title}`
-    }));
+    setDeleteConfirmation({
+      isOpen: true,
+      taskId: taskId,
+      taskTitle: task.title
+    });
+  };
+
+  const confirmDelete = () => {
+    if (deleteConfirmation.taskId) {
+      dispatch(removeTask(deleteConfirmation.taskId));
+      showToast({
+        type: 'SUCCESS',
+        message: `Task "${deleteConfirmation.taskTitle}" has been deleted`
+      });
+      setDeleteConfirmation({
+        isOpen: false,
+        taskId: null,
+        taskTitle: ''
+      });
+    }
   };
 
   const handleDragEnd = (event) => {
@@ -221,6 +236,17 @@ const TasksPage = () => {
         open={modalOpen}
         onClose={() => setModalOpen(false)}
         onAddTask={handleAddTask}
+      />
+
+      <ConfirmDeleteModal
+        open={deleteConfirmation.isOpen}
+        onClose={() => setDeleteConfirmation({
+          isOpen: false,
+          taskId: null,
+          taskTitle: ''
+        })}
+        onConfirm={confirmDelete}
+        taskTitle={deleteConfirmation.taskTitle}
       />
     </MainLayout>
   );

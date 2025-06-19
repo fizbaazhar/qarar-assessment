@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { login, setError, setLoading } from '../redux/authSlice';
+import { addNotification } from '../redux/notificationsSlice';
 import AuthLayout from '../components/AuthLayout';
 import Input from '../components/Input';
 import Button from '../components/Button';
+import { showToast } from '../utils/toaster';
 
 /**
  * LoginPage Component
@@ -19,6 +21,30 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const authError = useSelector((state) => state.auth.error);
   const isLoading = useSelector((state) => state.auth.isLoading);
+
+  // Function to add default notifications
+  const addDefaultNotifications = () => {
+    // Add "New comment" notification (2 minutes ago)
+    dispatch(addNotification({
+      type: 'INFO',
+      customTitle: 'New comment',
+      timestamp: new Date(Date.now() - 2 * 60 * 1000).toISOString()
+    }));
+
+    // Add "System update" notification (1 hour ago)
+    dispatch(addNotification({
+      type: 'WARNING',
+      customTitle: 'System update',
+      timestamp: new Date(Date.now() - 60 * 60 * 1000).toISOString()
+    }));
+
+    // Add "Password changed" notification (5 hours ago)
+    dispatch(addNotification({
+      type: 'SUCCESS',
+      customTitle: 'Password changed',
+      timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString()
+    }));
+  };
 
   /**
    * Validates the login form
@@ -73,6 +99,14 @@ const LoginPage = () => {
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       dispatch(login({ email: form.email, name: form.email.split('@')[0] }));
+      
+      // Add default notifications after successful login
+      addDefaultNotifications();
+      
+      showToast({
+        type: 'SUCCESS',
+        message: 'Login successful'
+      });
       navigate('/dashboard');
     } catch (err) {
       dispatch(setError('Login failed. Please try again.'));

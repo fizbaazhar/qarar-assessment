@@ -4,6 +4,7 @@ import ProfileCard from '../components/ProfileCard';
 import { updateProfile, setAvatar } from '../redux/profileSlice';
 import { addNotification } from '../redux/notificationsSlice';
 import MainLayout from '../components/MainLayout';
+import { showToast } from '../utils/toaster';
 
 const ProfilePage = () => {
   const profile = useSelector((state) => state.profile);
@@ -16,6 +17,10 @@ const ProfilePage = () => {
       type: 'SUCCESS',
       customTitle: 'Profile Updated Successfully'
     }));
+    showToast({
+      type: 'SUCCESS',
+      message: 'Profile Updated Successfully'
+    });
   };
 
   const handleAvatarChange = (avatarDataUrl) => {
@@ -25,6 +30,10 @@ const ProfilePage = () => {
       type: 'SUCCESS',
       customTitle: 'Profile Picture Updated Successfully'
     }));
+    showToast({
+      type: 'SUCCESS',
+      message: 'Profile Picture Updated Successfully'
+    });
   };
 
   return (
