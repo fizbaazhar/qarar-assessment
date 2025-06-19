@@ -1,0 +1,51 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Input Component > matches snapshot for basic input 1`] = `
+<div
+  class="mb-4"
+>
+  <label
+    class="block text-gray-700 text-xs sm:text-sm font-bold mb-2"
+  >
+    Email
+  </label>
+  <input
+    class="
+          shadow appearance-none border rounded-lg w-full py-2 sm:py-3 px-3 sm:px-4 text-xs sm:text-sm text-gray-700 leading-tight 
+          focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all
+          border-gray-200
+          
+          
+        "
+    placeholder="Enter email"
+    type="text"
+  />
+</div>
+`;
+
+exports[`Input Component > matches snapshot for input with error 1`] = `
+<div
+  class="mb-4"
+>
+  <label
+    class="block text-gray-700 text-xs sm:text-sm font-bold mb-2"
+  >
+    Email
+  </label>
+  <input
+    class="
+          shadow appearance-none border rounded-lg w-full py-2 sm:py-3 px-3 sm:px-4 text-xs sm:text-sm text-gray-700 leading-tight 
+          focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all
+          border-red-300
+          
+          
+        "
+    type="text"
+  />
+  <p
+    class="text-red-500 text-xs mt-1"
+  >
+    Email is required
+  </p>
+</div>
+`;

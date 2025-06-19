@@ -1,0 +1,121 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`LoginPage Component > matches snapshot 1`] = `
+<div>
+  <div
+    class="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-primary/10 via-white to-primary/20"
+  >
+    <div
+      class="w-full max-w-md p-8 bg-white rounded-2xl shadow-2xl flex flex-col items-center"
+    >
+      <div
+        class="mb-6 flex flex-col items-center"
+      >
+        <div
+          class="w-16 h-16 rounded-full bg-primary flex items-center justify-center mb-2 shadow-lg"
+        >
+          <span
+            class="text-white text-3xl font-bold"
+          >
+            <img
+              alt="Dashboard"
+              class="w-10 h-10"
+              src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='utf-8'?%3e%3c!--%20Uploaded%20to:%20SVG%20Repo,%20www.svgrepo.com,%20Generator:%20SVG%20Repo%20Mixer%20Tools%20--%3e%3csvg%20fill='%23ffffff'%20width='800px'%20height='800px'%20viewBox='0%200%2032%2032'%20id='icon'%20xmlns='http://www.w3.org/2000/svg'%3e%3cdefs%3e%3cstyle%3e%20.cls-1%20{%20fill:%20none;%20}%20%3c/style%3e%3c/defs%3e%3cpolygon%20points='4%2020%204%2022%208.586%2022%202%2028.586%203.414%2030%2010%2023.414%2010%2028%2012%2028%2012%2020%204%2020'/%3e%3crect%20x='24.0001'%20y='21'%20width='2'%20height='5'/%3e%3crect%20x='20.0001'%20y='16'%20width='2'%20height='10'/%3e%3crect%20x='16'%20y='18'%20width='2'%20height='8'/%3e%3cpath%20d='M28,2H4A2.002,2.002,0,0,0,2,4V16H4V13H28.001l.001,15H16v2H28a2.0027,2.0027,0,0,0,2-2V4A2.0023,2.0023,0,0,0,28,2ZM12,11H4V4h8Zm2,0V4H28l.0007,7Z'/%3e%3crect%20id='_Transparent_Rectangle_'%20data-name='&lt;Transparent%20Rectangle&gt;'%20class='cls-1'%20width='32'%20height='32'/%3e%3c/svg%3e"
+            />
+          </span>
+        </div>
+        <h1
+          class="text-3xl font-extrabold text-primary tracking-tight mb-1"
+        >
+          Dashboard
+        </h1>
+        <p
+          class="text-gray-400 text-sm"
+        >
+          Sign in to your account
+        </p>
+      </div>
+      <form
+        class="w-full space-y-6"
+      >
+        <h2
+          class="page-heading text-center"
+        >
+          Welcome Back
+        </h2>
+        <div
+          class="mb-4"
+        >
+          <label
+            class="block text-gray-700 text-xs sm:text-sm font-bold mb-2"
+            for="email"
+          >
+            Email Address
+          </label>
+          <input
+            class="
+          shadow appearance-none border rounded-lg w-full py-2 sm:py-3 px-3 sm:px-4 text-xs sm:text-sm text-gray-700 leading-tight 
+          focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all
+          border-gray-200
+          
+          
+        "
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            type="email"
+            value=""
+          />
+        </div>
+        <div
+          class="mb-4"
+        >
+          <label
+            class="block text-gray-700 text-xs sm:text-sm font-bold mb-2"
+            for="password"
+          >
+            Password
+          </label>
+          <input
+            class="
+          shadow appearance-none border rounded-lg w-full py-2 sm:py-3 px-3 sm:px-4 text-xs sm:text-sm text-gray-700 leading-tight 
+          focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all
+          border-gray-200
+          
+          
+        "
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            type="password"
+            value=""
+          />
+        </div>
+        <button
+          class="font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 whitespace-nowrap bg-primary text-white border-2 border-transparent hover:bg-white hover:text-primary hover:border-primary focus:ring-primary active:scale-95 px-4 sm:px-6 py-2 sm:py-2 text-xs sm:text-base md:text-lg w-full"
+          type="submit"
+        >
+          Sign In
+        </button>
+      </form>
+      <div
+        class="mt-6 text-center"
+      >
+        <p
+          class="text-gray-600 text-sm"
+        >
+          Don't have an account?
+           
+          <a
+            class="text-primary hover:text-primary-dark font-semibold hover:underline transition-colors"
+            data-discover="true"
+            href="/signup"
+          >
+            Sign up here
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;

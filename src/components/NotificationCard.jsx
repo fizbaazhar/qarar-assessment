@@ -60,7 +60,7 @@ const NotificationCard = ({
               {notification.title}
             </h3>
             {!notification.isRead && (
-              <div className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></div>
+              <div className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0" data-testid="unread-indicator"></div>
             )}
           </div>
           <p className="text-xs sm:text-sm text-gray-500 mt-0.5">
