@@ -50,17 +50,17 @@ const ProfileCard = ({ profile = {}, onSave, onAvatarChange }) => {
   };
 
   return (
-    <Card className="p-6 max-w-md w-full">
-      <div className="flex flex-col items-center mb-6">
+    <Card className="p-4 sm:p-6 max-w-md w-full">
+      <div className="flex flex-col items-center mb-4 sm:mb-6">
         <div
-          className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden cursor-pointer border-2 border-gray-300 hover:border-blue-400 transition"
+          className="w-20 h-20 sm:w-24 sm:h-24 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden cursor-pointer border-2 border-gray-300 hover:border-blue-400 transition"
           onClick={handleAvatarClick}
           title="Upload profile picture"
         >
           {avatar ? (
             <img src={avatar} alt="Profile" className="object-cover w-full h-full" />
           ) : (
-            <svg className="w-12 h-12 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+            <svg className="w-10 h-10 sm:w-12 sm:h-12 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
             </svg>
           )}
@@ -74,7 +74,7 @@ const ProfileCard = ({ profile = {}, onSave, onAvatarChange }) => {
         </div>
         <span className="text-xs text-gray-500 mt-2">Click to upload</span>
       </div>
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
         <Input
           type="text"
           name="firstName"

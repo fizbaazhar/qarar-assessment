@@ -81,8 +81,8 @@ const NotificationsPage = () => {
     <MainLayout>
       <div className="max-w-full mx-auto">
         <div className="bg-white rounded-lg shadow-sm">
-          <div className="px-4 py-5">
-            <h2 className="text-lg font-medium text-gray-900 mb-4">Notifications</h2>
+          <div className="px-3 sm:px-4 py-4 sm:py-5">
+            <h2 className="text-base sm:text-lg font-medium text-gray-900 mb-3 sm:mb-4">Notifications</h2>
             
             <div className="space-y-1 divide-y divide-gray-100">
               {notifications && notifications.length > 0 ? (
@@ -96,7 +96,7 @@ const NotificationsPage = () => {
                   />
                 ))
               ) : (
-                <div className="text-center py-4 text-gray-500">
+                <div className="text-center py-4 text-sm sm:text-base text-gray-500">
                   No notifications to show
                 </div>
               )}

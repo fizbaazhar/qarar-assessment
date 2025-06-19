@@ -26,7 +26,6 @@ ChartJS.register(
 
 /**
  * DashboardCard Component
- * A reusable card component for displaying dashboard metrics with optional chart
  * 
  * @component
  * @example
@@ -96,13 +95,13 @@ const DashboardCard = ({
 
   return (
     <div className={`bg-white rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.1)] p-6 ${className}`}>
-      <h2 className="text-lg font-semibold text-gray-800 mb-3">{title}</h2>
+      <h2 className="text-md lg:text-lg font-semibold text-gray-800 mb-3">{title}</h2>
       <div className="flex items-baseline gap-3">
-        <div className="text-3xl font-bold text-gray-900">
+        <div className="text-2xl lg:text-3xl font-bold text-gray-900">
           {prefix}{formattedValue}{suffix}
         </div>
         {trend !== null && (
-          <div className={`text-sm font-medium ${trend >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+          <div className={`text-sm lg:text-md font-medium ${trend >= 0 ? 'text-green-500' : 'text-red-500'}`}>
             {trend >= 0 ? '↑' : '↓'} {Math.abs(trend)}%
           </div>
         )}

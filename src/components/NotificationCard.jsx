@@ -45,23 +45,23 @@ const NotificationCard = ({
   };
 
   return (
-    <div className="py-3 first:pt-0">
+    <div className="py-2 sm:py-3 first:pt-0">
       <div className="flex items-start">
         {getNotificationIcon(notification.type)}
         <div className="flex-1">
-          <h3 className="text-[15px] font-medium text-gray-900 leading-5">
+          <h3 className="text-sm sm:text-[15px] font-medium text-gray-900 leading-5">
             {notification.title}
           </h3>
-          <p className="text-sm text-gray-500 mt-0.5">
+          <p className="text-xs sm:text-sm text-gray-500 mt-0.5">
             {formatTimeAgo(notification.timestamp)}
           </p>
         </div>
         <button
           onClick={() => onDelete(notification.id)}
-          className="p-2 text-gray-400 hover:text-gray-600 rounded-full transition-colors"
+          className="p-1 sm:p-2 text-gray-400 hover:text-gray-600 rounded-full transition-colors"
           title="Delete notification"
         >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>

@@ -24,7 +24,7 @@ const Input = ({
   return (
     <div className="mb-4">
       {label && (
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor={props.id}>
+        <label className="block text-gray-700 text-xs sm:text-sm font-bold mb-2" htmlFor={props.id}>
           {label}
         </label>
       )}
@@ -32,7 +32,7 @@ const Input = ({
         type={type}
         placeholder={placeholder}
         className={`
-          shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight 
+          shadow appearance-none border rounded-lg w-full py-2 sm:py-3 px-3 sm:px-4 text-xs sm:text-sm text-gray-700 leading-tight 
           focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all
           ${error ? 'border-red-300' : 'border-gray-200'}
           ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
