@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // Helpers for localStorage
 const PROFILE_KEY = 'profile';
+
 const loadProfile = () => {
   try {
     const data = localStorage.getItem(PROFILE_KEY);
@@ -10,11 +11,32 @@ const loadProfile = () => {
     return null;
   }
 };
+
 const saveProfile = (profile) => {
   localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
 };
 
-const initialState = loadProfile() || {
+// Helper: Load user data from auth to initialize profile
+const loadUserFromAuth = () => {
+  try {
+    const user = localStorage.getItem('user');
+    if (user) {
+      const userData = JSON.parse(user);
+      return {
+        firstName: userData.firstName || '',
+        lastName: userData.lastName || '',
+        email: userData.email || '',
+        age: userData.age || '',
+        avatar: userData.avatar || '',
+      };
+    }
+    return null;
+  } catch {
+    return null;
+  }
+};
+
+const initialState = loadProfile() || loadUserFromAuth() || {
   firstName: '',
   lastName: '',
   email: '',
@@ -35,11 +57,32 @@ const profileSlice = createSlice({
       saveProfile(state);
     },
     resetProfile: (state) => {
-      Object.assign(state, initialState);
-      saveProfile(initialState);
+      // Reset to completely empty state
+      const emptyState = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        age: '',
+        avatar: '',
+      };
+      Object.assign(state, emptyState);
+      // Clear from localStorage
+      localStorage.removeItem(PROFILE_KEY);
+    },
+    initializeFromUser: (state, action) => {
+      const userData = action.payload;
+      const profileData = {
+        firstName: userData.firstName || '',
+        lastName: userData.lastName || '',
+        email: userData.email || '',
+        age: userData.age || '',
+        avatar: userData.avatar || '',
+      };
+      Object.assign(state, profileData);
+      saveProfile(state);
     },
   },
 });
 
-export const { updateProfile, setAvatar, resetProfile } = profileSlice.actions;
+export const { updateProfile, setAvatar, resetProfile, initializeFromUser } = profileSlice.actions;
 export default profileSlice.reducer; 

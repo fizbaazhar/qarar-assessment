@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import MainLayout from '../components/MainLayout';
 import NotificationCard from '../components/NotificationCard';
+import Button from '../components/Button';
 import {
-  selectFilteredNotifications,
+  selectAllNotifications,
+  selectUnreadCount,
   markAsRead,
   markAsUnread,
+  markAllAsRead,
   deleteNotification
 } from '../redux/notificationsSlice';
 
 const NotificationsPage = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const notifications = useSelector(selectFilteredNotifications);
+  const notifications = useSelector(selectAllNotifications);
+  const unreadCount = useSelector(selectUnreadCount);
   const [, setTimeUpdate] = useState(0); // Force re-render for time updates
 
   // Update timestamps every minute
@@ -64,6 +66,12 @@ const NotificationsPage = () => {
   };
 
   const handleToggleRead = (notification) => {
+    console.log('Toggling notification:', {
+      id: notification.id,
+      title: notification.title,
+      currentReadState: notification.isRead
+    });
+    
     if (notification.isRead) {
       dispatch(markAsUnread(notification.id));
     } else {
@@ -75,14 +83,28 @@ const NotificationsPage = () => {
     dispatch(deleteNotification(notificationId));
   };
 
-  console.log('Current notifications:', notifications); // Debug log
+  const handleMarkAllAsRead = () => {
+    dispatch(markAllAsRead());
+  };
 
   return (
     <MainLayout>
       <div className="max-w-full mx-auto">
         <div className="bg-white rounded-lg shadow-sm">
           <div className="px-3 sm:px-4 py-4 sm:py-5">
-            <h2 className="page-heading p-2 lg:p-4 ">Notifications</h2>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="page-heading p-2 lg:p-4">Notifications</h2>
+              {unreadCount > 0 && (
+                <Button
+                  variant="primary"
+                  size="sm"
+                  onClick={handleMarkAllAsRead}
+                  className="text-xs sm:text-sm"
+                >
+                  Mark All as Read
+                </Button>
+              )}
+            </div>
             
             <div className="space-y-1 divide-y divide-gray-100 mt-2 md:mt-3 lg:mt-4 xl:mt-6">
               {notifications && notifications.length > 0 ? (

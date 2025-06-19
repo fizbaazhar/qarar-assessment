@@ -18,7 +18,7 @@ const AuthLayout = ({ icon, title, subtitle, children }) => {
           <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center mb-2 shadow-lg">
             <span className="text-white text-3xl font-bold">{icon}</span>
           </div>
-          <h1 className="text-3xl font-extrabold text-primary tracking-tight mb-1">Mini Dashboard</h1>
+          <h1 className="text-3xl font-extrabold text-primary tracking-tight mb-1">Dashboard</h1>
           <p className="text-gray-400 text-sm">{subtitle}</p>
         </div>
 

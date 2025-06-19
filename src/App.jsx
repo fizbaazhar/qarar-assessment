@@ -90,7 +90,23 @@ function App() {
           <Route path="/auth" element={<Navigate to="/login" replace />} />
         </Routes>
       </div>
-      <ToastContainer />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        limit={3}
+        style={{
+          '--toastify-toast-width': 'auto',
+          '--toastify-toast-max-width': '380px'
+        }}
+      />
     </Router>
   );
 }

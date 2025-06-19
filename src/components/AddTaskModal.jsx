@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
 import Button from './Button';
+import { showToast } from '../utils/toaster';
 
 const AddTaskModal = ({ open, onClose, onAddTask }) => {
   const [taskTitle, setTaskTitle] = useState('');
@@ -31,6 +32,10 @@ const AddTaskModal = ({ open, onClose, onAddTask }) => {
     };
 
     onAddTask(newTask);
+    showToast({
+      type: 'SUCCESS',
+      message: 'Task added successfully'
+    });
     setTaskTitle('');
     setError('');
     onClose();

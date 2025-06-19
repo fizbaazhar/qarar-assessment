@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ProfileCard from '../components/ProfileCard';
-import { updateProfile, setAvatar } from '../redux/profileSlice';
+import { updateProfile, setAvatar, initializeFromUser } from '../redux/profileSlice';
 import { addNotification } from '../redux/notificationsSlice';
 import MainLayout from '../components/MainLayout';
 import { showToast } from '../utils/toaster';
 
 const ProfilePage = () => {
   const profile = useSelector((state) => state.profile);
+  const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
+
+  // Initialize profile with user data when component mounts
+  useEffect(() => {
+    if (user && (!profile.firstName || !profile.email)) {
+      dispatch(initializeFromUser(user));
+    }
+  }, [user, profile, dispatch]);
 
   const handleSave = (data) => {
     dispatch(updateProfile(data));

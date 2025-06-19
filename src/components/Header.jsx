@@ -89,7 +89,7 @@ const Header = ({ onLogout }) => {
           }}
           onClick={() => navigate('/dashboard')}
         >
-          Mini Dashboard
+          Dashboard
         </Typography>
 
         {/* Center - Desktop Navigation */}

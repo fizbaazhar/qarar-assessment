@@ -25,19 +25,19 @@ const saveNotificationsToStorage = (notifications) => {
 const getInitialNotifications = () => [
   {
     id: 1,
-    ...createNotification('COMMENT'),
+    ...createNotification('INFO', 'New comment'),
     timestamp: new Date(Date.now() - 2 * 60 * 1000).toISOString(), // 2 min ago
     isRead: false
   },
   {
     id: 2,
-    ...createNotification('SYSTEM_UPDATE'),
+    ...createNotification('WARNING', 'System update'),
     timestamp: new Date(Date.now() - 60 * 60 * 1000).toISOString(), // 1 hour ago
     isRead: false
   },
   {
     id: 3,
-    ...createNotification('PASSWORD_CHANGE'),
+    ...createNotification('SUCCESS', 'Password changed'),
     timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(), // 5 hours ago
     isRead: false
   }

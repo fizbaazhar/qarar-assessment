@@ -36,19 +36,47 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     signup: (state, action) => {
-      state.user = action.payload;
+      const { email, name } = action.payload;
+      
+      // Create comprehensive user object with profile data
+      const userData = {
+        id: Date.now(),
+        email,
+        name,
+        firstName: name.split(' ')[0] || '',
+        lastName: name.split(' ').slice(1).join(' ') || '',
+        age: '',
+        avatar: '',
+        createdAt: new Date().toISOString(),
+      };
+      
+      state.user = userData;
       state.isAuthenticated = true;
       state.isLoading = false;
       state.error = null;
-      saveUser(action.payload);
+      saveUser(userData);
     },
     login: (state, action) => {
       // For demo: just accept any credentials
-      state.user = action.payload;
+      const { email, name } = action.payload;
+      
+      // Create user object for login (similar to signup)
+      const userData = {
+        id: Date.now(),
+        email,
+        name,
+        firstName: name.split(' ')[0] || '',
+        lastName: name.split(' ').slice(1).join(' ') || '',
+        age: '',
+        avatar: '',
+        createdAt: new Date().toISOString(),
+      };
+      
+      state.user = userData;
       state.isAuthenticated = true;
       state.isLoading = false;
       state.error = null;
-      saveUser(action.payload);
+      saveUser(userData);
     },
     logout: (state) => {
       state.user = null;
@@ -79,8 +107,19 @@ export const logoutUser = () => (dispatch) => {
   // Reset all Redux slices
   dispatch(logout());
   
+  // Reset profile to initial state
+  dispatch({ 
+    type: 'profile/resetProfile',
+    payload: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      age: '',
+      avatar: '',
+    }
+  });
+  
   // Reset other slices to their initial state
-  dispatch({ type: 'profile/resetProfile' });
   dispatch({ type: 'tasks/setTasks', payload: [] });
   dispatch({ type: 'notifications/clearAllNotifications' });
 };

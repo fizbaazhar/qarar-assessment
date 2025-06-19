@@ -95,7 +95,15 @@ const LoginPage = () => {
     dispatch(setLoading(true));
     
     try {
-      dispatch(login({ email: form.email, name: form.email.split('@')[0] }));
+      // Create a user-friendly name from email
+      const emailName = form.email.split('@')[0];
+      const friendlyName = emailName
+        .replace(/[._-]/g, ' ') // Replace dots, underscores, hyphens with spaces
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        .join(' ');
+      
+      dispatch(login({ email: form.email, name: friendlyName }));
       
       // Add default notifications after successful login
       addDefaultNotifications();
