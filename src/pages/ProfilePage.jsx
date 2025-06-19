@@ -33,7 +33,7 @@ const ProfilePage = () => {
 
   const handleAvatarChange = (avatarDataUrl) => {
     dispatch(setAvatar(avatarDataUrl));
-    // Create success notification for avatar update
+    //  success notification for profile photo update
     dispatch(addNotification({
       type: 'SUCCESS',
       customTitle: 'Profile Picture Updated Successfully'
