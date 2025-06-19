@@ -1,6 +1,7 @@
 import React from 'react';
 import systemUpdateIcon from '../assets/icons/system-update.svg';
 import messageIcon from '../assets/icons/message.svg';
+import { NOTIFICATION_TYPES } from '../config/notificationTypes';
 
 const NotificationCard = ({ 
   notification, 
@@ -23,6 +24,7 @@ const NotificationCard = ({
           </div>
         );
       case 'password':
+      case 'update':
         return (
           <div className="w-10 h-10 bg-[#4AC29C] rounded-lg flex items-center justify-center mr-3">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -31,7 +33,14 @@ const NotificationCard = ({
           </div>
         );
       default:
-        return null;
+        // Fallback to checkmark icon for any unhandled types
+        return (
+          <div className="w-10 h-10 bg-[#4AC29C] rounded-lg flex items-center justify-center mr-3">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16.6666 5L7.49992 14.1667L3.33325 10" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+        );
     }
   };
 

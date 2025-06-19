@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { selectUnreadCount } from '../redux/notificationsSlice';
+import bellIcon from '../assets/icons/notification-bell.svg';
 
 const Header = ({ onLogout }) => {
   const user = useSelector((state) => state.auth.user);
@@ -66,63 +67,64 @@ const Header = ({ onLogout }) => {
               >
                 Tasks
               </button>
-              <button
-                onClick={() => navigate('/notifications')}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors relative ${
-                  isActive('/notifications')
-                    ? 'bg-primary-10 text-primary'
-                    : 'text-gray-600 hover:text-primary hover:bg-primary-10'
-                }`}
-              >
-                Notifications
-                {unreadCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                    {unreadCount > 99 ? '99+' : unreadCount}
-                  </span>
-                )}
-              </button>
             </nav>
           </div>
-          <div className="relative" ref={dropdownRef}>
+          <div className="flex items-center space-x-4">
             <button
-              className="flex items-center space-x-2 focus:outline-none"
-              onClick={() => setDropdownOpen((open) => !open)}
-              aria-label="User menu"
+              onClick={() => navigate('/notifications')}
+              className={`p-2 rounded-md transition-transform hover:scale-110 relative ${
+                isActive('/notifications') ? 'scale-110' : ''
+              }`}
+              aria-label="Notifications"
             >
-              {avatarSrc ? (
-                <img
-                  src={avatarSrc}
-                  alt="User avatar"
-                  className="w-9 h-9 rounded-full object-cover border-2 border-primary"
-                />
-              ) : (
-                <div className="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center border-2 border-primary">
-                  <svg className="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-                  </svg>
+              <img src={bellIcon} alt="Notifications" className="w-6 h-6" />
+              {unreadCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {unreadCount > 99 ? '99+' : unreadCount}
+                </span>
+              )}
+            </button>
+            <div className="relative" ref={dropdownRef}>
+              <button
+                className="flex items-center space-x-2 focus:outline-none"
+                onClick={() => setDropdownOpen((open) => !open)}
+                aria-label="User menu"
+              >
+                {avatarSrc ? (
+                  <img
+                    src={avatarSrc}
+                    alt="User avatar"
+                    className="w-9 h-9 rounded-full object-cover border-2 border-primary"
+                  />
+                ) : (
+                  <div className="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center border-2 border-primary">
+                    <svg className="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                )}
+                <span className="hidden sm:inline text-gray-700 font-medium">{displayName}</span>
+                <svg className="w-4 h-4 text-gray-500 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {dropdownOpen && (
+                <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                  <button
+                    className="w-full text-left px-4 py-2 hover:bg-gray-100 text-gray-700 rounded-t-lg"
+                    onClick={() => { setDropdownOpen(false); navigate('/profile'); }}
+                  >
+                    Profile
+                  </button>
+                  <button
+                    className="w-full text-left px-4 py-2 hover:bg-gray-100 text-gray-700 rounded-b-lg"
+                    onClick={() => { setDropdownOpen(false); onLogout(); }}
+                  >
+                    Logout
+                  </button>
                 </div>
               )}
-              <span className="hidden sm:inline text-gray-700 font-medium">{displayName}</span>
-              <svg className="w-4 h-4 text-gray-500 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            {dropdownOpen && (
-              <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-                <button
-                  className="w-full text-left px-4 py-2 hover:bg-gray-100 text-gray-700 rounded-t-lg"
-                  onClick={() => { setDropdownOpen(false); navigate('/profile'); }}
-                >
-                  Profile
-                </button>
-                <button
-                  className="w-full text-left px-4 py-2 hover:bg-gray-100 text-gray-700 rounded-b-lg"
-                  onClick={() => { setDropdownOpen(false); onLogout(); }}
-                >
-                  Logout
-                </button>
-              </div>
-            )}
+            </div>
           </div>
         </div>
       </div>

@@ -20,6 +20,7 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 import { logout } from '../redux/authSlice';
 import { addTask, removeTask, toggleTask, reorderTasks } from '../redux/tasksSlice';
+import { addNotification } from '../redux/notificationsSlice';
 import Header from '../components/Header';
 
 // Sortable Task Item Component
@@ -129,16 +130,33 @@ const TasksPage = () => {
     };
 
     dispatch(addTask(newTask));
+    // Create success notification for new task
+    dispatch(addNotification({
+      type: 'SUCCESS',
+      customTitle: 'New Task Added Successfully'
+    }));
     setNewTaskTitle('');
     setError('');
   };
 
   const handleToggleTask = (taskId) => {
+    const task = tasks.find(t => t.id === taskId);
     dispatch(toggleTask(taskId));
+    // Create info notification for task status change
+    dispatch(addNotification({
+      type: 'INFO',
+      customTitle: `Task ${task.completed ? 'Uncompleted' : 'Completed'}: ${task.title}`
+    }));
   };
 
   const handleDeleteTask = (taskId) => {
+    const task = tasks.find(t => t.id === taskId);
     dispatch(removeTask(taskId));
+    // Create warning notification for task deletion
+    dispatch(addNotification({
+      type: 'WARNING',
+      customTitle: `Task Deleted: ${task.title}`
+    }));
   };
 
   const handleDragEnd = (event) => {
@@ -150,6 +168,11 @@ const TasksPage = () => {
 
       const reorderedTasks = arrayMove(tasks, oldIndex, newIndex);
       dispatch(reorderTasks(reorderedTasks));
+      // Create info notification for task reordering
+      dispatch(addNotification({
+        type: 'INFO',
+        customTitle: 'Tasks Order Updated'
+      }));
     }
   };
 

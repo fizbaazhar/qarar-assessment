@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { NOTIFICATION_TYPES, createNotification } from '../config/notificationTypes';
 
 // Load notifications from localStorage on initialization
 const loadNotificationsFromStorage = () => {
@@ -24,23 +25,20 @@ const saveNotificationsToStorage = (notifications) => {
 const getInitialNotifications = () => [
   {
     id: 1,
-    title: 'New comment',
+    ...createNotification('COMMENT'),
     timestamp: new Date(Date.now() - 2 * 60 * 1000).toISOString(), // 2 min ago
-    type: 'comment',
     isRead: false
   },
   {
     id: 2,
-    title: 'System update',
+    ...createNotification('SYSTEM_UPDATE'),
     timestamp: new Date(Date.now() - 60 * 60 * 1000).toISOString(), // 1 hour ago
-    type: 'system',
     isRead: false
   },
   {
     id: 3,
-    title: 'Password changed',
+    ...createNotification('PASSWORD_CHANGE'),
     timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(), // 5 hours ago
-    type: 'password',
     isRead: false
   }
 ];
@@ -75,11 +73,11 @@ const notificationsSlice = createSlice({
       saveNotificationsToStorage(state.notifications);
     },
     addNotification: (state, action) => {
+      const { type, customTitle } = action.payload;
       const newNotification = {
         id: Date.now(),
-        timestamp: new Date().toISOString(),
-        isRead: false,
-        ...action.payload
+        ...createNotification(type, customTitle),
+        isRead: false
       };
       state.notifications.unshift(newNotification);
       saveNotificationsToStorage(state.notifications);

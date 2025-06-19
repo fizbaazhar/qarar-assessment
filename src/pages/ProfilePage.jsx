@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ProfileCard from '../components/ProfileCard';
 import { updateProfile, setAvatar } from '../redux/profileSlice';
+import { addNotification } from '../redux/notificationsSlice';
 import { logout } from '../redux/authSlice';
 import Header from '../components/Header';
 
@@ -11,10 +12,20 @@ const ProfilePage = () => {
 
   const handleSave = (data) => {
     dispatch(updateProfile(data));
+    // Create success notification for profile update
+    dispatch(addNotification({
+      type: 'SUCCESS',
+      customTitle: 'Profile Updated Successfully'
+    }));
   };
 
   const handleAvatarChange = (avatarDataUrl) => {
     dispatch(setAvatar(avatarDataUrl));
+    // Create success notification for avatar update
+    dispatch(addNotification({
+      type: 'SUCCESS',
+      customTitle: 'Profile Picture Updated Successfully'
+    }));
   };
 
   const handleLogout = () => {
