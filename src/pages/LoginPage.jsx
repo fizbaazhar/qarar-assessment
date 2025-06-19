@@ -11,7 +11,6 @@ import dashboardIcon from '../assets/dashboard.svg';
 /**
  * LoginPage Component
  * Handles user authentication with email and password
- * Features: Form validation, error handling, and navigation to signup
  */
 const LoginPage = () => {
   const [form, setForm] = useState({ email: '', password: '' });
@@ -24,21 +23,18 @@ const LoginPage = () => {
 
   // Function to add default notifications
   const addDefaultNotifications = () => {
-    // Add "New comment" notification (2 minutes ago)
     dispatch(addNotification({
       type: 'INFO',
       customTitle: 'New comment',
       timestamp: new Date(Date.now() - 2 * 60 * 1000).toISOString()
     }));
 
-    // Add "System update" notification (1 hour ago)
     dispatch(addNotification({
       type: 'WARNING',
       customTitle: 'System update',
       timestamp: new Date(Date.now() - 60 * 60 * 1000).toISOString()
     }));
 
-    // Add "Password changed" notification (5 hours ago)
     dispatch(addNotification({
       type: 'SUCCESS',
       customTitle: 'Password changed',
