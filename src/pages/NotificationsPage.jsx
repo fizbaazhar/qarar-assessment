@@ -1,0 +1,77 @@
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import Header from '../components/Header';
+import NotificationCard from '../components/NotificationCard';
+import {
+  selectFilteredNotifications,
+  markAsRead,
+  markAsUnread,
+  deleteNotification
+} from '../redux/notificationsSlice';
+
+const NotificationsPage = ({ onLogout }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const notifications = useSelector(selectFilteredNotifications);
+
+  const formatTimeAgo = (timestamp) => {
+    const now = new Date();
+    const notificationTime = new Date(timestamp);
+    const diffInMs = now - notificationTime;
+    const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
+    const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
+
+    if (diffInMinutes < 60) return `${diffInMinutes} min ago`;
+    if (diffInHours < 24) return `${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
+    return `${Math.floor(diffInHours / 24)} days ago`;
+  };
+
+  const handleToggleRead = (notification) => {
+    if (notification.isRead) {
+      dispatch(markAsUnread(notification.id));
+    } else {
+      dispatch(markAsRead(notification.id));
+    }
+  };
+
+  const handleDelete = (notificationId) => {
+    dispatch(deleteNotification(notificationId));
+  };
+
+  console.log('Current notifications:', notifications); // Debug log
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <Header onLogout={onLogout} />
+      
+      <div className="max-w-full mx-auto px-4 sm:px-6 py-8">
+        <div className="bg-white rounded-lg shadow-sm">
+          <div className="px-4 py-5">
+            <h2 className="text-lg font-medium text-gray-900 mb-4">Notifications</h2>
+            
+            <div className="space-y-1 divide-y divide-gray-100">
+              {notifications && notifications.length > 0 ? (
+                notifications.map((notification) => (
+                  <NotificationCard
+                    key={notification.id}
+                    notification={notification}
+                    onToggleRead={handleToggleRead}
+                    onDelete={handleDelete}
+                    formatTimeAgo={formatTimeAgo}
+                  />
+                ))
+              ) : (
+                <div className="text-center py-4 text-gray-500">
+                  No notifications to show
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default NotificationsPage; 

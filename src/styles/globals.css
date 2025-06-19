@@ -3,6 +3,7 @@
   --color-primary: #64A4F4;
   --color-primary-light: #85b5f6;
   --color-primary-dark: #4a8be8;
+  --color-primary-5: rgba(100, 164, 244, 0.05);
   --color-primary-10: rgba(100, 164, 244, 0.1);
   --color-primary-20: rgba(100, 164, 244, 0.2);
   --color-primary-50: rgba(100, 164, 244, 0.5);
@@ -20,6 +21,10 @@
 
 .bg-primary-dark {
   background-color: var(--color-primary-dark);
+}
+
+.bg-primary-5 {
+  background-color: var(--color-primary-5);
 }
 
 .bg-primary-10 {

@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { selectUnreadCount } from '../redux/notificationsSlice';
 
 const Header = ({ onLogout }) => {
   const user = useSelector((state) => state.auth.user);
   const profile = useSelector((state) => state.profile);
+  const unreadCount = useSelector(selectUnreadCount);
   const navigate = useNavigate();
   const location = useLocation();
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -63,6 +65,21 @@ const Header = ({ onLogout }) => {
                 }`}
               >
                 Tasks
+              </button>
+              <button
+                onClick={() => navigate('/notifications')}
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors relative ${
+                  isActive('/notifications')
+                    ? 'bg-primary-10 text-primary'
+                    : 'text-gray-600 hover:text-primary hover:bg-primary-10'
+                }`}
+              >
+                Notifications
+                {unreadCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    {unreadCount > 99 ? '99+' : unreadCount}
+                  </span>
+                )}
               </button>
             </nav>
           </div>

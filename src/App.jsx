@@ -5,6 +5,7 @@ import SignupPage from './pages/SignupPage';
 import DashboardPage from './pages/DashboardPage';
 import ProfilePage from './pages/ProfilePage';
 import TasksPage from './pages/TasksPage';
+import NotificationsPage from './pages/NotificationsPage';
 import './index.css';
 
 /**
@@ -70,6 +71,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <TasksPage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/notifications" 
+            element={
+              <ProtectedRoute>
+                <NotificationsPage />
               </ProtectedRoute>
             } 
           />
