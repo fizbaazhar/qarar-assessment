@@ -1,3 +1,4 @@
+
 export default {
   content: [
     "./index.html",
@@ -10,4 +11,4 @@ export default {
     '@tailwindcss/postcss': {},
     autoprefixer: {},
   },
-}; 
+};
